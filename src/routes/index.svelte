@@ -1,7 +1,5 @@
 <script>
     import Header from "$lib/Header.svelte"
-    import Frame from "$lib/Header.svelte"
-import Layout from "./__layout.svelte"
     let matieres = {}
     let base_url = "https://raw.githubusercontent.com/Astri2/CoursKatex/main/"
     
@@ -11,14 +9,12 @@ import Layout from "./__layout.svelte"
 		matieres = response 
     })
 
-    let url = ""
-
 </script>
 
 <div class="flex bg-[#ebebeb]">
     <div class="shadow h-[100%] fixed w-48" id="menu">
         {#key matieres}
-            <Header bind:url base_url={base_url} menu={matieres}></Header>
+            <Header base_url={base_url} menu={matieres}></Header>
         {/key}
     </div>
     <div id="iframe_content" class="ml-48 h-[100%] w-[100%]">

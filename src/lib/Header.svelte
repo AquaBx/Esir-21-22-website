@@ -40,7 +40,7 @@
 {#key path}
 <div class="transition">
     {#if i > 0}
-        <p class="p-5 block hover:bg-[#F7AE50] transition" on:click={retour}>
+        <p class="p-5 hover:bg-[#F7AE50] transition select-none cursor-pointer" on:click={retour}>
             <img alt="" class="inline-block align-bottom" src="/svg/arrow.svg">
             Retour
         </p>
@@ -49,11 +49,11 @@
         { #each Object.keys(path[i]) as categorie }
             {#if categorie == "links"}
                 { #each Object.keys(path[i][categorie]) as chapitre }
-                    <li class="p-5 hover:bg-[#F7AE50] transition" on:click={change_cours(path[i][categorie][chapitre])}>{chapitre}</li>
+                    <li class="p-5 hover:bg-[#F7AE50] transition select-none cursor-pointer" on:click={change_cours(path[i][categorie][chapitre])}>{chapitre}</li>
                 {/each}
             {:else if categorie == "categories"}
                 { #each Object.keys(path[i][categorie]) as chapitre }
-                    <li class="p-5 hover:bg-[#F7AE50] transition" on:click={change_menu(path[i][categorie][chapitre])}>{chapitre}</li>
+                    <li class="p-5 hover:bg-[#F7AE50] transition select-none cursor-pointer" on:click={change_menu(path[i][categorie][chapitre])}>{chapitre}</li>
                 {/each}
             {/if}
         { /each }
