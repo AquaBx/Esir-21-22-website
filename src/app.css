@@ -13,14 +13,20 @@
 
 html {
 	font-family: 'Poppins';
-	background-color: #ebebeb;
+	background:#ebebeb;
 }
 
 #iframe_content {
-	padding: 0 15px;
+	padding: 40px 20px;
+	margin: auto;
 }
 
 #iframe_content hr , #iframe_content h1, #iframe_content h2, #iframe_content h3, #iframe_content h4, #iframe_content h5, #iframe_content h6, #iframe_content img, #iframe_content ol, #iframe_content li, #iframe_content ul {
 	all: revert;
 }
 
+@media print {
+	#menu-logo,#menu {
+	  display: none !important;  /* hide whole page */
+	}
+  }
