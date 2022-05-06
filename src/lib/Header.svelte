@@ -21,7 +21,7 @@
         }
     } 
     function change_cours(e){
-        document.querySelector("#iframe_cours").src = e
+        document.querySelector("#iframe_cours").src = base_url + e
     }
 
     function change_menu(e){
