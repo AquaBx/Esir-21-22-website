@@ -1,18 +1,13 @@
 <script>
-    import Header from "$lib/Header.svelte"
     export let menu
     export let path = [menu] 
     export let i = 0
-
     export let base_url
 
     function hide(e){
         let display = e.target.parentNode.querySelectorAll("ul")
-
         if (display.length == 0) return
-
         display = display[0]
-
         if ( display.style.display == "none"){
             display.style.display = "block"
         }
@@ -20,15 +15,20 @@
             display.style.display = "none"
         }
     } 
+
     function change_cours(e){
-        document.querySelector("#iframe_cours").src = base_url + e
+        let url = base_url + e
+        let content = document.querySelector("#iframe_content")
+        fetch(url).then(response => {return response.text()}).then(response => {content.innerHTML = response })
     }
 
     function change_menu(e){
         i+=1
         path[i] = e
         if (e.index){
-            document.querySelector("#iframe_cours").src = base_url + e.index
+            let url = base_url + e
+            let content = document.querySelector("#iframe_content")
+            fetch(url).then(response => {return response.text()}).then(response => {content.innerHTML = response })
         }
     }
 
@@ -36,18 +36,16 @@
         delete path[i]
         i-=1
     }
-
 </script>
 {#key path}
 <div class="transition">
     {#if i > 0}
-        <a class="p-5 block hover:bg-[#F7AE50] transition" on:click={retour}>
-            <img class="inline-block align-bottom" src="/svg/arrow.svg">
+        <p class="p-5 block hover:bg-[#F7AE50] transition" on:click={retour}>
+            <img alt="" class="inline-block align-bottom" src="/svg/arrow.svg">
             Retour
-        
-        </a>
+        </p>
     {/if}
-    <ul class="w-48" >
+    <ul>
         { #each Object.keys(path[i]) as categorie }
             {#if categorie == "links"}
                 { #each Object.keys(path[i][categorie]) as chapitre }
