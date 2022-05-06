@@ -9,8 +9,6 @@
 		matieres = response 
     })
 
-
-
 </script>
 
 <div class="flex">
