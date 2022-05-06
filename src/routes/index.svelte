@@ -9,13 +9,15 @@
     })
      
 </script>
+<script type="module" src="https://unpkg.com/x-frame-bypass"></script>
+
 <div class="flex bg-[#ebebeb]">
     <div class="shadow h-[100vh] block" id="menu">
         {#key matieres}
             <Header base_url={base_url}  menu={matieres}></Header>
         {/key}
     </div>
-    <iframe id="iframe_cours" class="w-[100%]"></iframe>
+    <iframe is="x-frame-bypass" id="iframe_cours" class="w-[100%]"></iframe>
 
 </div>
 
