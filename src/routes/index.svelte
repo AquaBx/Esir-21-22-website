@@ -9,15 +9,15 @@
 		matieres = response 
     })
 
+
+
 </script>
 
 <div class="flex">
-    <div class="shadow h-[100%] fixed w-48" id="menu">
-        {#key matieres}
-            <Header base_url={base_url} menu={matieres}></Header>
-        {/key}
-    </div>
-    <div id="iframe_content" class="ml-48 h-[100%] w-[100%]">
+    {#key matieres}
+        <Header base_url={base_url} menu={matieres}></Header>
+    {/key}
+    <div id="iframe_content">
     </div>
 </div>
 
