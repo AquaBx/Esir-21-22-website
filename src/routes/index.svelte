@@ -22,7 +22,7 @@
 </div>
 
 <svelte:head>
-    <title>Tom Chauvel</title>
+    <title>Cours ESIR</title>
     <meta name="description" content="Site de cours pour L'Esir">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/default.min.css">
