@@ -3,6 +3,9 @@
     export let menu
     export let path = [menu] 
     export let i = 0
+
+    export let base_url
+
     function hide(e){
         let display = e.target.parentNode.querySelectorAll("ul")
 
@@ -25,7 +28,7 @@
         i+=1
         path[i] = e
         if (e.index){
-            document.querySelector("#iframe_cours").src = e.index
+            document.querySelector("#iframe_cours").src = base_url + e.index
         }
     }
 
