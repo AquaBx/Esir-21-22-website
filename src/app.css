@@ -25,6 +25,11 @@ html {
 	all: revert;
 }
 
+#menu{
+	background:#ebebeb;
+	z-index: 20;
+}
+
 @media print {
 	#menu-logo,#menu {
 	  display: none !important;  /* hide whole page */
