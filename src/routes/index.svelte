@@ -9,7 +9,6 @@
     })
      
 </script>
-<script type="module" src="https://unpkg.com/x-frame-bypass"></script>
 
 <div class="flex bg-[#ebebeb]">
     <div class="shadow h-[100vh] block" id="menu">
