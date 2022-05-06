@@ -1,8 +1,8 @@
 <script>
     import Header from "$lib/Header.svelte"
     let matieres ={}
-
-    fetch("https://raw.githubusercontent.com/Astri2/CoursKatex/main/cours.json").then(response => {
+    let base_url = "https://raw.githubusercontent.com/Astri2/CoursKatex/main/"
+    fetch(base_url+"cours.json").then(response => {
 		return response.json()
     }).then(response => {
 		matieres = response 
@@ -12,7 +12,7 @@
 <div class="flex bg-[#ebebeb]">
     <div class="shadow h-[100vh] block" id="menu">
         {#key matieres}
-            <Header  menu={matieres}></Header>
+            <Header base_url={base_url}  menu={matieres}></Header>
         {/key}
     </div>
     <iframe id="iframe_cours" class="w-[100%]"></iframe>
@@ -22,5 +22,4 @@
 <svelte:head>
     <title>Tom Chauvel</title>
     <meta name="description" content="Site de cours pour L'Esir">
-
 </svelte:head>
