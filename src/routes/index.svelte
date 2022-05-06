@@ -11,7 +11,7 @@
 
 </script>
 
-<div class="flex bg-[#ebebeb]">
+<div class="flex">
     <div class="shadow h-[100%] fixed w-48" id="menu">
         {#key matieres}
             <Header base_url={base_url} menu={matieres}></Header>
