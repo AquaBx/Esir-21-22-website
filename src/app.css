@@ -34,6 +34,10 @@ html {
 	z-index: 20;
 }
 
+.katex{
+    text-align: initial !important;
+}
+
 @media print {
 	#menu-logo,#menu {
 	  display: none !important;  /* hide whole page */
