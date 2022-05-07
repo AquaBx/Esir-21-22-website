@@ -24,6 +24,6 @@
     <meta name="description" content="Site de cours pour L'Esir">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/default.min.css">
-    <link rel="stylesheet" href="/katex.min.css">
+    <link rel="stylesheet" href="/katex/katex.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markdown-it-texmath/css/texmath.min.css">
 </svelte:head>
