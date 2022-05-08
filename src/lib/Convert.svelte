@@ -53,30 +53,76 @@
         return "<pre class='language-"+lang+"'>" + Prism.highlight(code, Prism.languages[lang], lang) + "</pre>"
     }
 
-    function page(text){
-        html = ""
-        let splited = text.split("$$")
-
-        for (let i in splited) {
-            let content = splited[i]
-            if (i%2 == 0) {
-                let splited2 = content.split("```")
-                for (let j in splited2) {
-                    let content2 = splited2[j]
-                    if (j%2 == 0) {
-                        html += marked(content2).replaceAll("---",'<hr dir="auto">')
-                    }
-                    else{
-                        html += code(content2)
-                    }
-                }
-            }
-            else {
-                html += katex.renderToString(content, options);
-            }
-        }
+    function math(text){
+        return katex.renderToString(text, options)
     }
 
+    function allindexof(caracters, text) {
+        let indices = [];
+        let last;
+        while (last != -1) {
+            last = text.indexOf(caracters, (last + 1));
+            if (last != -1) {
+                indices.push(last);
+            }
+        }
+        return indices;
+    }
+
+    function dico_add(text,char,dico,indices,func) {
+        let codechar = allindexof(char,text).reverse()
+
+        let t = char.length
+
+        for ( let i in codechar) {
+            if (i%2 == 0) {codechar[i] +=t; continue;}
+
+            let y0 = codechar[i]
+            let y1 = codechar[i-1]
+
+            let content = text.substring(y0+t, y1-t)
+            dico[y0] = func(content)
+        }
+
+        return indices.concat(codechar)
+    }
+
+    function page(text){
+        let dico = {}
+        let indices = []
+
+        indices = dico_add(text,"$$",dico,indices,math)
+        indices = dico_add(text,"```",dico,indices,code)
+
+        let mark = indices
+
+        for ( let i in mark ) {
+            let limit = mark.length-1
+            if (i%2 == 1 && i!=limit) continue;
+
+            let y0 = mark[i]
+            let y1 = mark[i-1]
+            let content
+
+            if (y1 == undefined) {
+                content = text.substring(y0)
+            }
+            else if (i == limit) {
+                content = text.substring(0, y0)
+                
+            }
+            else{
+                content = text.substring(y0, y1)
+            }
+            dico[y0] = marked(content).replaceAll("---","<hr dir='auto'/>")
+        }
+
+        html = ""
+
+        for ( let i in dico) {
+            html += dico[i]
+        }
+    }
 </script>
 
 <div id="iframe_content">
