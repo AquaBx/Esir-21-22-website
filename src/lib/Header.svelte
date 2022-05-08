@@ -1,27 +1,14 @@
 <script>
+    import { fade, fly } from 'svelte/transition';
     export let menu
     export let path = [menu] 
     export let i = 0
     export let base_url
-
     export let transition_direction = 0
-
-    function hide(e){
-        let display = e.target.parentNode.querySelectorAll("ul")
-        if (display.length == 0) return
-        display = display[0]
-        if ( display.style.display == "none"){
-            display.style.display = "block"
-        }
-        else {
-            display.style.display = "none"
-        }
-    } 
+    import { md } from '$lib/stores.js';
 
     function change_cours(e){
-        let url = base_url + e
-        let content = document.querySelector("#iframe_content")
-        fetch(url).then(response => {return response.text()}).then(response => {content.innerHTML = response })
+        md.set(base_url + e)
     }
 
     function change_menu(e){
@@ -34,8 +21,10 @@
         }
         transition_direction = 200
     }
+
     let display = "none"
     let on = true
+
     function reduce(){
         if (on) {
             display = "block"
@@ -54,7 +43,6 @@
         transition_direction = -200
     }
 
-    import { fade, fly } from 'svelte/transition';
 </script>
 <div>
     <p id="menu-logo" class="p-5 fixed hover:bg-[#F7AE50] transition select-none cursor-pointer" on:click={reduce}>
