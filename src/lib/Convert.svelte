@@ -1,7 +1,7 @@
 <svelte:head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.css" crossorigin="anonymous">
-    <link href="/prism.css" rel="stylesheet" />
     <script src="/prism.js"></script>
+    <link href="/prism.css" rel="stylesheet" />
 </svelte:head>
 
 <script>
@@ -46,11 +46,11 @@
         }
     }
 
-    function code (text){
-        let lang = text.split("\n")[0]
-        let code = text.split("\n").slice(1).join("\n")
+    function code(text){
+        let lang = text.split("\r\n")[0]
+        let code = text.split("\r\n").slice(1).join("\r\n")
 
-        return "<pre class='language-" + lang + "'>" + code + "</pre>"
+        return "<pre class='language-"+lang+"'>" + Prism.highlight(code, Prism.languages[lang], lang) + "</pre>"
     }
 
     function page(text){
@@ -61,8 +61,8 @@
             let content = splited[i]
             if (i%2 == 0) {
                 let splited2 = content.split("```")
-                for (let j in splited) {
-                    let content2 = splited2[i]
+                for (let j in splited2) {
+                    let content2 = splited2[j]
                     if (j%2 == 0) {
                         html += marked(content2).replaceAll("---",'<hr dir="auto">')
                     }
