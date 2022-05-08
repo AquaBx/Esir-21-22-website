@@ -1,5 +1,7 @@
 <svelte:head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.css" crossorigin="anonymous">
+    <link href="themes/prism.css" rel="stylesheet" />
+    <script src="prism.js"></script>
 </svelte:head>
 
 <script>
@@ -44,6 +46,13 @@
         }
     }
 
+    function code (text){
+        let lang = text.split("\n")[0]
+        let code = text.split("\n").slice(1).join("\n")
+
+        return "<pre class='language-" + lang + "'>" + code + "</pre>"
+    }
+
     function page(text){
         html = ""
         let splited = text.split("$$")
@@ -51,7 +60,16 @@
         for (let i in splited) {
             let content = splited[i]
             if (i%2 == 0) {
-                html += marked(content).replaceAll("---",'<hr dir="auto">')
+                let splited2 = content.split("```")
+                for (let j in splited) {
+                    let content2 = splited2[i]
+                    if (i%2 == 0) {
+                        html += marked(content2).replaceAll("---",'<hr dir="auto">')
+                    }
+                    else{
+                        html += code(content2)
+                    }
+                }
             }
             else {
                 html += katex.renderToString(content, options);
