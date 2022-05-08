@@ -1,7 +1,7 @@
 <svelte:head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.css" crossorigin="anonymous">
-    <link href="themes/prism.css" rel="stylesheet" />
-    <script src="prism.js"></script>
+    <link href="/prism.css" rel="stylesheet" />
+    <script src="/prism.js"></script>
 </svelte:head>
 
 <script>
@@ -63,7 +63,7 @@
                 let splited2 = content.split("```")
                 for (let j in splited) {
                     let content2 = splited2[i]
-                    if (i%2 == 0) {
+                    if (j%2 == 0) {
                         html += marked(content2).replaceAll("---",'<hr dir="auto">')
                     }
                     else{
