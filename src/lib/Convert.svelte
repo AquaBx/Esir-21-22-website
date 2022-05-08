@@ -109,7 +109,7 @@
             }
             else if (i == limit) {
                 content = text.substring(0, y0)
-                
+                y0 = 0
             }
             else{
                 content = text.substring(y0, y1)
