@@ -2,11 +2,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.css" crossorigin="anonymous">
     <script src="/prism.js"></script>
     <link href="/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </svelte:head>
 
 <script>
     import katex from "katex";
-    import marked from "snarkdown";
     import { md } from '$lib/stores.js';
 
     const options = {
@@ -71,19 +71,15 @@
 
     function dico_add(text,char,dico,indices,func) {
         let codechar = allindexof(char,text).reverse()
-
         let t = char.length
-
         for ( let i in codechar) {
             if (i%2 == 0) {codechar[i] +=t; continue;}
-
             let y0 = codechar[i]
             let y1 = codechar[i-1]
-
             let content = text.substring(y0+t, y1-t)
             dico[y0] = func(content)
         }
-
+        
         return indices.concat(codechar)
     }
 
@@ -114,12 +110,12 @@
             else{
                 content = text.substring(y0, y1)
             }
-            dico[y0] = marked(content).replaceAll("---","<hr dir='auto'/>")
+            dico[y0] = marked.parse(content)
         }
 
         html = ""
 
-        for ( let i in dico) {
+        for ( let i in dico ) {
             html += dico[i]
         }
     }
