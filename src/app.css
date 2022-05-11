@@ -29,6 +29,17 @@ html {
 	display:revert;
 }
 
+#iframe_content td, #iframe_content th {
+	padding:6px 13px;
+	border:1px solid #9c9c9c;
+	border-collapse:collapse;
+}
+
+#iframe_content table {
+	margin: 1em auto;
+	width:100%;
+}
+
 #menu{
 	background:#ebebeb;
 	z-index: 20;
