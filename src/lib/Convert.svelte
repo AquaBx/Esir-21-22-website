@@ -25,7 +25,8 @@
             "\\embrace": "\\left#2\\begin{split} #1 \\end{split}\\right#3",
             "\\aembrace": "\\embrace{#1}{\\{}{\\}}",
             "\\pembrace": "\\embrace{#1}{\\(}{\\)}",
-            "\\cembrace": "\\embrace{#1}{\\[}{\\]}"
+            "\\cembrace": "\\embrace{#1}{\\[}{\\]}",
+            "\\abs": "\displaystyle\left\lvert{#1}\right\rvert"
         }
     }
 
