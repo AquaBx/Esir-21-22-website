@@ -45,6 +45,10 @@ html {
 	z-index: 20;
 }
 
+.katex{
+	font:revert;
+}
+
 @media print {
 	#menu-logo,#menu {
 		display: none !important;  /* hide whole page */
