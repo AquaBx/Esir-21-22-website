@@ -48,8 +48,8 @@
     }
 
     function code(text){
-        let lang = text.split("\r\n")[0]
-        let code = text.split("\r\n").slice(1).join("\r\n")
+        let lang = text.split("\n")[0]
+        let code = text.split("\n").slice(1).join("\r\n")
 
         return "<pre class='language-"+lang+"'>" + Prism.highlight(code, Prism.languages[lang], lang) + "</pre>"
     }
