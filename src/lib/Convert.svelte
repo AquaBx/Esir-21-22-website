@@ -90,7 +90,9 @@
 
         indices = dico_add(text,"$$",dico,indices,math)
         indices = dico_add(text,"```",dico,indices,code)
-
+        
+        indices.sort(function(a, b) { return a - b; }).reverse()
+        
         let mark = indices
 
         for ( let i in mark ) {
