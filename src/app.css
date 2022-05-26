@@ -19,6 +19,7 @@ html {
 #iframe_content {
 	padding: 40px 20px;
 	margin: auto;
+	width:750px;
 }
 
 #iframe_content hr , #iframe_content h1, #iframe_content h2, #iframe_content h3, #iframe_content h4, #iframe_content h5, #iframe_content h6, #iframe_content ol, #iframe_content li, #iframe_content ul {
