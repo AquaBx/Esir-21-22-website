@@ -76,7 +76,7 @@
     }
 
     async function api_load() {      
-        let api = await fetch("https://api.github.com/repos/Cours-ESIR/Cours/content" + path)
+        let api = await fetch("https://api.github.com/repos/Cours-ESIR/Cours/contents" + path)
         let data = await api.json()
         
         if ( data.download_url ) {
@@ -86,7 +86,7 @@
 
             path = path.split("/").slice(0,-1).join("/")
 
-            let api = await fetch("https://api.github.com/repos/Cours-ESIR/Cours/content" + npath)
+            let api = await fetch("https://api.github.com/repos/Cours-ESIR/Cours/contents" + npath)
             data = await api.json()           
         }
 
