@@ -1,0 +1,17 @@
+<script>
+
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
+
+
+fetch("https://github.com/login/oauth/access_token", {
+  headers: {
+    accept: "application/vnd.github+json",
+    code: params.code,
+    client_secret:"ba2950ff193ab85406973ff04cabdc12a8f1aa37",
+    client_id:"9c8d71a76138f612b874"
+  },
+  method: "POST"
+})
+
+</script>
