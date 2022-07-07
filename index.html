@@ -44,9 +44,8 @@
         <textarea id="copy" style="position: absolute; top:-200%;"></textarea>
 
 <script>
-    let url = "https://api.github.com/repos/Cours-ESIR"
     let path
-let sidebar_state = true
+    let sidebar_state = true
 
             function copy() {
               let copyText = document.querySelector("#copy");
@@ -71,21 +70,13 @@ let sidebar_state = true
     }
 
     async function load_file(file) {
-        let npath = path.split("/")
-        npath.splice(2,0,"main")
-        npath = npath.join("/")
-
-        let req = await fetch("https://raw.githubusercontent.com/Cours-ESIR/"+npath)
+        let req = await fetch("https://raw.githubusercontent.com/Cours-ESIR/Cours/main"+path)
         let data = await req.text()
         document.querySelector("#cours").innerHTML = page(data)
     }
 
-    async function api_load() {
-        let npath = path.split("/")
-        npath.splice(2,0,"contents")
-        npath = npath.join("/")
-        
-        let api = await fetch(url + npath)
+    async function api_load() {      
+        let api = await fetch("https://api.github.com/repos/Cours-ESIR/Cours/content" + path)
         let data = await api.json()
         
         if ( data.download_url ) {
@@ -93,10 +84,9 @@ let sidebar_state = true
 
             load_file(filename)
 
-            npath = npath.split("/").slice(0,-1).join("/")
-		path = path.split("/").slice(0,-1).join("/")
+            path = path.split("/").slice(0,-1).join("/")
 
-            let api = await fetch(url + npath)
+            let api = await fetch("https://api.github.com/repos/Cours-ESIR/Cours/content" + npath)
             data = await api.json()           
         }
 
@@ -118,24 +108,12 @@ let sidebar_state = true
     
     window.onhashchange = load
     function load() {
-        let list = [
-            {name:"Prépa L1",shortcut:"PrepaL1"},
-            {name:"Prépa L2",shortcut:"PrepaL2"},
-            {name:"ESIR 1",shortcut:"ESIR1"},
-            {name:"ESIR 2",shortcut:"ESIR2"},
-            {name:"ESIR 3",shortcut:"ESIR3"}
-        ]
-
         let hash = decodeURI(document.location.hash.substring(1))
         document.querySelector("#sidebar #links").innerHTML = ""
 
         if (hash == ""){
-            for ( let item of list){
-                let a = document.createElement("a")
-                a.href = "#/" + item.shortcut
-                a.innerText = item.name
-                document.querySelector("#sidebar #links").appendChild(a)
-            }
+            path = hash
+            api_load()
         }
         else{
             path = hash
