@@ -49,12 +49,10 @@ html, body {
 td, th {
 	padding:6px 13px;
 	border:1px solid #9c9c9c;
-	border-collapse:collapse;
 }
 
 table {
-	margin: 1em auto;
-	width:100%;
+	border-collapse: collapse;
 }
 
 #navbar {
