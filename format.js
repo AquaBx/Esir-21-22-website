@@ -1,5 +1,3 @@
-let html = ""
-
 const options = {
     displayMode: true,
     throwOnError: false,
@@ -80,7 +78,7 @@ function page(text){
         }
         dico[y0] = marked.parse(content)
     }
-    html = ""
+    let html = ""
     for ( let i in dico ) {
         html += dico[i]
     }
