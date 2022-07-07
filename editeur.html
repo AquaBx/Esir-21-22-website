@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="FR">
+<head>
+    	<title>ESIR - Cours</title>
+    	<link rel="icon" href="/">
+    
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    <meta name="description"  content="">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+        <script src="./format.js"></script>
+        <link href="./style.css" rel="stylesheet" />
+        <script src="./format.js"></script>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/libs/fontawesome/css/all.min.css">
+        <!-- Prism -->
+        <script src="/libs/prism.js"></script>
+        <link href="/libs/prism.css" rel="stylesheet" />
+        <!-- Marked -->
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.css" integrity="sha384-1IGr2Yb8xuHjwTG+WoGjj2+I/a/N6z0gDD5YIGCQxywPROOKc3+orbn/R7arWQxD" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.js" integrity="sha384-I2b1Pcl48X93GxEkGkaMo1hrd6n+IX8H2wgSsMimGbkZoGTve/87h1FjaDNvlpQi" crossorigin="anonymous"></script>
+
+
+<style>
+	#editeur {
+		display:flex;
+		height : 100%;
+	}
+
+	#editeur > * {
+		flex:1;
+		resize: none;
+		padding: 40px 20px;
+	}
+
+	blockquote {
+		color: rgba(0,0,0,.5);
+    		padding-left: 1.5em;
+    		border-left: 5px solid rgba(0,0,0,.1);
+	}
+
+</style>
+
+    </head>
+<body>
+<div id="navbar">
+<a onclick = "insert_start('# ')"> <i class="fa-solid fa-heading"></i> </a>
+<a onclick = "insert_start('## ')"> <i class="fa-solid fa-heading"></i> </a>
+
+<a onclick = "insert_start('> ')"> <i class="fa-solid fa-quote-right"></i> </a>
+
+<a onclick = "insert_start('- ')"> <i class="fa-solid fa-list"></i> </a>
+
+<a onclick = "insert_cursor('\n\n---\n\n')"> <i class="fa-solid fa-grip-lines"></i> </a>
+
+<a onclick = "insert_cursor('\n```python\n#micode\n```\n')"> <i class="fa-solid fa-code"></i> </a>
+
+<a onclick = "insert_cursor('\n$$\n1+1=2\n$$\n')"> <i class="fa-solid fa-square-root-variable"></i> </a>
+
+<a onclick = "insert_cursor('\n|nom|prénom|\n|:-:|:-:|\n|martin|léo|\n')"> <i class="fa-solid fa-table"></i> </a>
+
+<a onclick = "insert_cursor(' [`texte`](`lien`) ')"> <i class="fa-solid fa-link"></i> </a>
+<a onclick = "insert_cursor(' ![`description image`](`lien`) ')"> <i class="fa-solid fa-image"></i> </a>
+
+<a onclick = "insert_between('**')"> <i class="fa-solid fa-bold"></i> </a>
+<a onclick = "insert_between('*')"> <i class="fa-solid fa-italic"></i> </a>
+<a onclick = "insert_between('~')"> <i class="fa-solid fa-strikethrough"></i> </a>
+</div>
+
+<div id="editeur">
+	<textarea id="brut"></textarea>
+	<div id="parsed"></div>
+</div>
+
+<script>
+	let textarea = document.querySelector("#brut")
+	let textparsed = document.querySelector("#parsed")
+
+	let start_pos = 0
+	let end_pos = 0
+
+	function count(str,val){
+		return str.split(val).length-1
+	}
+
+	function insert_start(add) {
+		let bef = textarea.value.substring(0,start_pos)
+
+		let id = count(bef,"\n")
+
+		let text_split = textarea.value.split("\n")
+		
+		text_split[id] = add + text_split[id]
+
+		textarea.value = text_split.join("\n")
+
+		update()
+	}
+
+	function insert_cursor(add) {
+		let bef = textarea.value.substring(0,start_pos)
+		let aft = textarea.value.substring(start_pos)
+
+		textarea.value = bef + add + aft
+
+		update()
+	}
+
+	function insert_between(add){
+		let bef = textarea.value.substring(0,start_pos)
+		let content = textarea.value.substring(start_pos,end_pos)
+		let aft = textarea.value.substring(end_pos)
+
+
+		console.log(start_pos,end_pos)
+
+		end_pos += 2 * add.length
+
+		console.log(start_pos,end_pos)
+
+		textarea.value = bef + add + content + add + aft
+
+		update()
+	}
+
+	textarea.onclick = (e) => {
+		start_pos = e.target.selectionStart
+		end_pos = e.target.selectionEnd
+	}	
+	
+	textarea.oninput = (e) => {
+		start_pos = e.target.selectionStart
+	
+		update()
+	}
+
+	let update = () => { textparsed.innerHTML = page(textarea.value) } 
+</script>
+
+</body>
+</html>
