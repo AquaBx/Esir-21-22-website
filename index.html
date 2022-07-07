@@ -47,53 +47,48 @@
     let path
     let sidebar_state = true
 
-            function copy() {
-              let copyText = document.querySelector("#copy");
-              copyText.value = url;
-              copyText.select();
-              document.execCommand("copy");
-            }
+    function copy() {
+        let copyText = document.querySelector("#copy");
+        copyText.value = url;
+        copyText.select();
+        document.execCommand("copy");
+    }
 
-            document.querySelector("#sidebar_button").onclick = () => {
-                let sidebar = document.querySelector("#sidebar")
-                if (sidebar_state) {
-                    sidebar.style.transform = "translateX(-100%)"
-                    sidebar_state = false
-                } else {
-                    sidebar.style.transform = "translateX(0%)"
-                    sidebar_state = true
-                }
-            }
+    document.querySelector("#sidebar_button").onclick = () => {
+        let sidebar = document.querySelector("#sidebar")
+        if (sidebar_state) {
+            sidebar.style.transform = "translateX(-100%)"
+            sidebar_state = false
+        } else {
+            sidebar.style.transform = "translateX(0%)"
+            sidebar_state = true
+        }
+    }
 
     function retour() {
         document.location.hash = path.split("/").slice(0,-1).join("/")
     }
 
     async function load_file(file) {
-        let req = await fetch("https://raw.githubusercontent.com/Cours-ESIR/Cours/main"+path)
+        let req = await fetch("https://raw.githubusercontent.com/Cours-ESIR/Cours/main" + path + "/" +file)
         let data = await req.text()
         document.querySelector("#cours").innerHTML = page(data)
     }
 
-    async function api_load() {      
+    async function update_sidebar() {    
+        document.querySelector("#sidebar #links").innerHTML = ""  
         let api = await fetch("https://api.github.com/repos/Cours-ESIR/Cours/contents" + path)
         let data = await api.json()
         
-        if ( data.download_url ) {
-            let filename = path.split("/").slice(-1)[0]
-
-            load_file(filename)
-
-            path = path.split("/").slice(0,-1).join("/")
-
-            let api = await fetch("https://api.github.com/repos/Cours-ESIR/Cours/contents" + path)
-            data = await api.json()           
-        }
-
         let already_added = []
 
         for ( let item of data){
             let name =  item.name
+
+            if ( name.toUpperCase() == "README.MD" ){
+                load_file(name)
+                continue
+            }
 
             let a = document.createElement("a")
             a.href = "#" + path + "/" + name
@@ -105,25 +100,24 @@
         }
     }
 
-    
     window.onhashchange = load
+
     function load() {
         let hash = decodeURI(document.location.hash.substring(1))
-        document.querySelector("#sidebar #links").innerHTML = ""
-
-        if (hash == ""){
-            path = hash
-            api_load()
+        
+	    path = hash
+        
+	    if ( hash.split(".md").length == 2 ) {
+            let filename = path.split("/").slice(-1)[0]
+	    	path = path.split("/").slice(0,-1).join("/")
+            load_file(filename)
         }
-        else{
-            path = hash
-            api_load()
-        }
-
+        
+        update_sidebar()
     }
 </script>
         <script type="module">    
-            await load()            
+            await load()
         </script>
     </body>
 </html>
