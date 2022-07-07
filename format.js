@@ -21,7 +21,15 @@ const options = {
 function code(text){
     let lang = text.split("\n")[0]
     let code = text.split("\n").slice(1).join("\r\n")
-    return "<pre class='language-"+lang+"'>" + Prism.highlight(code, Prism.languages[lang], lang) + "</pre>"
+
+
+
+	if ( lang == "" ) {
+		return "<pre class='language-python'>" + code + "</pre>"
+	}
+	else {
+		return "<pre class='language-"+lang+"'>" + Prism.highlight(code, Prism.languages[lang], lang) + "</pre>"
+	}
 }
 
 function math(text){
@@ -60,7 +68,15 @@ function page(text){
     indices = dico_add(text,"```",dico,indices,code)
     indices.sort(function(a, b) { return a - b; }).reverse()
     let mark = indices
+
+	if (mark.length == 0) {
+		return marked.parse(text)
+	}
+
     for ( let i in mark ) {
+	console.log(i)
+	if ( indices[i] == 0 ) { continue }
+
         let limit = mark.length-1
         if (i%2 == 1 && i!=limit) continue;
         let y0 = mark[i]
@@ -78,6 +94,7 @@ function page(text){
         }
         dico[y0] = marked.parse(content)
     }
+
     let html = ""
     for ( let i in dico ) {
         html += dico[i]
