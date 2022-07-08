@@ -89,6 +89,7 @@ table {
 	cursor: pointer;
 	color:var(--text);
 	text-decoration: none;
+	text-overflow: ellipsis;
 }
 
 #sidebar a:hover {
