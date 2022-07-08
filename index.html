@@ -45,17 +45,12 @@
 
 <script>
     let path
-    let sidebar_state = true
+    let sidebar_state = false
+    switch_menu()
+    document.querySelector("#sidebar_button").onclick = () => { switch_menu() }
 
-    function copy() {
-        let copyText = document.querySelector("#copy");
-        copyText.value = url;
-        copyText.select();
-        document.execCommand("copy");
-    }
-
-    document.querySelector("#sidebar_button").onclick = () => {
-        let sidebar = document.querySelector("#sidebar")
+    function switch_menu() {
+    	let sidebar = document.querySelector("#sidebar")
         if (sidebar_state) {
             sidebar.style.transform = "translateY( calc(-50vh - 68px - 16px * 2 ) ) translateX(-50%)"
             sidebar_state = false
@@ -64,6 +59,15 @@
             sidebar_state = true
         }
     }
+    
+    function copy() {
+        let copyText = document.querySelector("#copy");
+        copyText.value = url;
+        copyText.select();
+        document.execCommand("copy");
+    }
+
+    
 
     function retour() {
         document.location.hash = path.split("/").slice(0,-1).join("/")
