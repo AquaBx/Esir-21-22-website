@@ -57,10 +57,10 @@
     document.querySelector("#sidebar_button").onclick = () => {
         let sidebar = document.querySelector("#sidebar")
         if (sidebar_state) {
-            sidebar.style.transform = "translateY( calc(-50vh - 68px - 16px * 2 ) )"
+            sidebar.style.transform = "translateY( calc(-50vh - 68px - 16px * 2 ) ) translateX(-50%)"
             sidebar_state = false
         } else {
-            sidebar.style.transform = "translateY(0%)"
+            sidebar.style.transform = "translateY(0%) translateX(-50%)"
             sidebar_state = true
         }
     }
