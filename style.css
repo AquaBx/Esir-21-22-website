@@ -103,8 +103,8 @@ table {
 	padding:70px 20px;
 }
 
-#cours > p {
-	margin:0;
+#cours > * {
+	margin: 0px 0px 16px 0px !important;
 }
 
 .katex-display{
