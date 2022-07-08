@@ -45,9 +45,7 @@
 
 <script>
     let path
-    let sidebar_state = false
-    switch_menu()
-    document.querySelector("#sidebar_button").onclick = () => { switch_menu() }
+    let sidebar_state = true
 
     function switch_menu() {
     	let sidebar = document.querySelector("#sidebar")
@@ -59,6 +57,9 @@
             sidebar_state = true
         }
     }
+	
+    switch_menu()
+    document.querySelector("#sidebar_button").onclick = () => { switch_menu() }
     
     function copy() {
         let copyText = document.querySelector("#copy");
