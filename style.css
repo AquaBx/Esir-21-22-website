@@ -96,7 +96,7 @@ table {
 }
 
 #cours {
-	width:710px;
+	width:clamp(100px,calc(100vw - 40px),710px);
 	margin:auto;
 	padding:70px 20px;
 }
