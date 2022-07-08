@@ -74,10 +74,11 @@ table {
 }
 
 #sidebar {
-	top:60px;
+	top:68px;
 	height: 50vh;
 	width:12rem;
 	transition: 0.3s;
+	overflow-y:scroll;
 }
 
 #sidebar a {
