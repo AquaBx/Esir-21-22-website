@@ -36,17 +36,20 @@ html, body {
 	background:var(--background);
 }
 
-#navbar, .modal {
+#navbar, .modal, #sidebar {
 	display: block;
 	box-shadow: 0px 0px 10px var(--shadow);
 	padding:16px;
 	position: fixed;
-    z-index: 50001;
-
-    backdrop-filter: blur(2px);
-    background: #89898942;
-    color: white;
-    border-radius: 0.4em;
+    	z-index: 50000;
+	
+    	backdrop-filter: blur(2px);
+    	background: #89898942;
+    	color: white;
+    	border-radius: 0.4em;
+	
+	left: 50%;
+    	transform: translateX(-50%);
 }
 
 td, th {
@@ -60,28 +63,20 @@ table {
 
 #navbar {
 	top:10px;
-	left: 50%;
-    transform: translateX(-50%);
 
 	display: grid;
-    grid-gap: 16px;
-    grid-auto-flow: column;
+    	grid-gap: 16px;
+    	grid-auto-flow: column;
 }
 
 .modal{
 	top:50%;
-	left: 50%;
-    transform: translate(-50%,-50%);
 }
 
 #sidebar {
-	display: block;
-	box-shadow: 0px 0px 10px var(--shadow);
-	height: 100%;
-	position: fixed;
+	top:60px;
+	height: 50vh;
 	width:12rem;
-	background:var(--background);
-    z-index: 50000;
 	transition: 0.3s;
 }
 
@@ -90,7 +85,7 @@ table {
 	padding:1.25rem;
 	transition:0.3s;
 	cursor: pointer;
-	color:var(--text);
+	color:white;
 	text-decoration: none;
 	text-overflow: ellipsis;
 	white-space:nowrap;
