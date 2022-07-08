@@ -24,6 +24,9 @@
 	.no-print	{
 		display: none !important;
 	}
+	#cours{
+		padding:0;
+	}
 }
 
 html, body {
@@ -99,7 +102,7 @@ table {
 }
 
 #cours {
-	width:clamp(100px,calc(100vw - 40px),710px);
+	width:clamp(100px,calc(100vw - 40px),595px);
 	margin:auto;
 	padding:70px 20px;
 }
