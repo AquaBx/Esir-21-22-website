@@ -90,6 +90,8 @@ table {
 	color:var(--text);
 	text-decoration: none;
 	text-overflow: ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
 }
 
 #sidebar a:hover {
