@@ -181,7 +181,7 @@ async function modif_file(repo,token,path,msg,content,sha) {
 }
 
 async function check_file(repo,path){
-	let fet = await fetch("https://api.github.com/repos/"+repo+"/contents/"+path)
+	let fet = await fetch("https://api.github.com/repos/"+repo+"/contents"+path)
 	fet = await fet.json()
 	return ( fet["message"] == "Not Found" ) ? false : fet["sha"]
 }
