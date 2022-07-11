@@ -114,8 +114,8 @@
 	if ( hash.split(".md").length == 2 ) {
             	let filename = path.split("/").slice(-1)[0]
 	    	path = path.split("/").slice(0,-1).join("/")
-		url = location.origin + "#" + path + "/" + file
-		document.title = "ESIR - Cours | " + file
+		url = location.origin + "#" + path + "/" + filename
+		document.title = "ESIR - Cours | " + filename
 		load_file(filename)
         }
         
