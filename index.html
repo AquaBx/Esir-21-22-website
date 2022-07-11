@@ -46,7 +46,8 @@
 <script>
     let path
     let sidebar_state = true
-
+    let url
+    
     function switch_menu() {
     	let sidebar = document.querySelector("#sidebar")
         if (sidebar_state) {
@@ -110,12 +111,13 @@
     function load() {
         let hash = decodeURI(document.location.hash.substring(1))
         
-	    path = hash
+	path = hash
         
-	    if ( hash.split(".md").length == 2 ) {
-            let filename = path.split("/").slice(-1)[0]
+	if ( hash.split(".md").length == 2 ) {
+            	let filename = path.split("/").slice(-1)[0]
 	    	path = path.split("/").slice(0,-1).join("/")
-            load_file(filename)
+		url = path
+		load_file(filename)
         }
         
         update_sidebar()
