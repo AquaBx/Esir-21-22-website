@@ -93,6 +93,8 @@
             let name =  item.name
 
             if ( name.toUpperCase() == "README.MD" ){
+		url = location.origin + "#" + path
+		document.title = "ESIR - Cours | " + path
                 load_file(name)
                 continue
             }
