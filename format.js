@@ -74,7 +74,6 @@ function page(text){
 	}
 
     for ( let i in mark ) {
-	console.log(i)
 	if ( indices[i] == 0 ) { continue }
 
         let limit = mark.length-1
