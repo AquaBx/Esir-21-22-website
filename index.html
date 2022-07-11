@@ -31,7 +31,7 @@
 		<i class="fa-solid fa-plus"></i>
             <i class="fa-solid fa-pen-to-square"></i>
             <i onclick="print()" class="fa-solid fa-print"></i>
-            <i onclick="copy()" class="fa-solid fa-share"></i>
+            <i onclick="share()" class="fa-solid fa-share"></i>
         </div>
 
         <div id="sidebar" class="no-print">
@@ -62,21 +62,19 @@
     switch_menu()
     document.querySelector("#sidebar_button").onclick = () => { switch_menu() }
     
-    function copy() {
-        let copyText = document.querySelector("#copy");
-        copyText.value = url;
-        copyText.select();
-        document.execCommand("copy");
+    function share() {
+        window.navigator.share({
+  		title: document.title,
+  		url: url
+	});
     }
-
-    
 
     function retour() {
         document.location.hash = path.split("/").slice(0,-1).join("/")
     }
 
     async function load_file(file) {
-        let req = await fetch("https://raw.githubusercontent.com/Cours-ESIR/Cours/main" + path + "/" +file)
+        let req = await fetch("https://raw.githubusercontent.com/Cours-ESIR/Cours/main" + path + "/" + file)
         let data = await req.text()
         document.querySelector("#cours").innerHTML = page(data)
     }
@@ -116,7 +114,8 @@
 	if ( hash.split(".md").length == 2 ) {
             	let filename = path.split("/").slice(-1)[0]
 	    	path = path.split("/").slice(0,-1).join("/")
-		url = path
+		url = location.origin + "#" + path + "/" + file
+		document.title = "ESIR - Cours | " + file
 		load_file(filename)
         }
         
