@@ -121,6 +121,13 @@ table {
 	margin: 0px 0px 16px 0px !important;
 }
 
+#cours img {
+	max-width : 100%;
+	max-height: 372px;
+	margin: auto;
+    	display: block;
+}
+
 .katex-display{
 	overflow: auto hidden;
 }
