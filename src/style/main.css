@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@import url('https://css.gg/all.css');
+
+:root {
+	--blue:#5A8DEE;
+	--green:#39DA8A;
+	--red:#F26061;	
+}
+
+@media (prefers-color-scheme: light){
+	:root	{
+		--background:rgb(255, 255, 255);
+        --compl:rgb(245,245,255);
+		--text:#000000;
+		--text-reverse:#ffffff;
+		--shadow:rgba(0, 0, 0, 0.1);
+	}
+}
+
+@media (prefers-color-scheme: dark){
+    :root	{
+        --background:rgb(25, 25, 35);
+        --compl:rgb(20, 20, 30);
+		--text:#ffffff;
+		--text-reverse:#000000;
+		--shadow:rgba(0, 0, 0, 0.3);
+	}
+}
+
+@media print
+{
+	.no-print	{
+		display: none !important;
+	}
+	#cours{
+		padding:0;
+	}
+}
+
+html,body, a,a:hover, a:visited, a:link {
+    all:unset;
+}
+
+html,body {
+    background-color: var(--background);
+	height:-webkit-fill-available;
+	width:-webkit-fill-available;
+	overflow: hidden;
+}
+
+* {
+    font-family: Poppins;
+    color:var(--text);
+}
+
+#router > * {
+	margin: 0px 0px 16px 0px !important;
+}
+
+#router img {
+	max-width : 100%;
+	max-height: 372px;
+	margin: auto;
+    display: block;
+}
+
+.katex-display{
+	overflow: auto hidden;
+}
+
+td, th {
+	padding:6px 13px;
+	border:1px solid #9c9c9c;
+}
+
+table {
+	border-collapse: collapse;
+}
