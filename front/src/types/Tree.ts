@@ -2,17 +2,12 @@ export namespace Tree {
 
     export enum NodeKind { File, Folder };
 
-    export interface File {
-        name: string;
-        url: string;
-    };
-
-    export interface Folder {
-        name: string;
-    };
 
     export interface TreeNode {
-        data: File&Folder;
+        data: {
+            name: string;
+            url?: string;
+        };
         kind: NodeKind;
         children?: TreeNode[];
     };

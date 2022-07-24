@@ -2,17 +2,18 @@
 import { ref, onUpdated } from 'vue';
 import { marked } from 'marked';
 
+import GithubService from '@/services/GithubService';
+
 const props = defineProps<{
-    url: string,
+    path: string,
 }>();
 
 const content = ref('');
 
-onUpdated(() => {
-    if(props.url !== '') {
-        fetch(props.url).then(response => response.text()).then((text) => {
-            content.value = marked.parse(text);
-        });
+onUpdated(async () => {
+    if(props.path !== '') {
+        let raw = await GithubService.getFileContent(props.path);
+        content.value = marked.parse(raw);
     }
 });
 </script>

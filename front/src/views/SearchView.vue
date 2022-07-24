@@ -1,28 +1,77 @@
 <script lang="ts" setup>
-import { ref, getCurrentInstance } from 'vue';
-import TreeHierarchyService from '@/services/TreeHierarchyService';
-import NavigationTree from '@/components/Navigation/NavigationTree.vue';
-import FileContent from '@/components/Main/FileContent.vue';
+import { onMounted, ref } from 'vue';
+import GithubService from '@/services/GithubService';
 
+const input         = ref("");
+const files         = ref<string[]>([]);
+const list_filtered = ref<string[]>([]);
 
-const currentFile = ref('');
+function filter() {
+    let text = input.value.toUpperCase();
+    list_filtered.value = [];
 
-function changeFile(test: string) {
-    currentFile.value = test;
+    if(text.length === 0) return;
+
+    for (let file of files.value){
+        if (file.toUpperCase().includes(text)) {
+            list_filtered.value.push(file);
+        }
+    }
 }
+
+onMounted(async () => {
+    files.value = await GithubService.getAllFiles();
+});
 
 </script>
 
 <template>
-    <div id="flexcontent">
-        <NavigationTree @selected-file="changeFile" :root="TreeHierarchyService.fetch()" :path="getCurrentInstance()?.appContext.config.globalProperties.currentPath ?? []" />
-        <FileContent :url="currentFile" />
-    </div>
+    <main>
+        <div class="input">
+            <icon>
+                <i class="gg-search"></i>
+            </icon>
+            <input v-model="input" @input="filter">
+        </div>
+        <template v-for="file of list_filtered">
+            <p>{{ file }}</p>
+        </template>
+    </main>
 </template>
 
 <style scoped>
-#flexcontent {
-    display: flex;
-}
+    .input {
+        display: flex;
+        border: 3px solid var(--text);
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius:1.5rem;
+        transition:0.5s;
+    }
+
+    .input > *:nth-child(2) {
+        all:unset;
+        flex:auto;
+        background-color: transparent;
+        padding : 8px 8px 8px 8px ;
+        transition:0.5s;
+    }
+
+    .input > *:nth-child(1){
+        width:41px;
+        display: grid;
+        place-items: center;
+    }
+
+    i {
+        transition:0.5s;
+    }
+
+    .input:focus-within, .input:hover {
+        border: 3px solid var(--green);
+    }
+    .input:focus-within * , .input:hover *{
+        color:var(--green);
+    }
 
 </style>

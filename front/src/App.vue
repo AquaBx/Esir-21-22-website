@@ -1,13 +1,19 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { RouterView } from 'vue-router'
 import Menu from '@/components/Navigation/Menu.vue';
+import Topbar from '@/components/Header/Topbar.vue';
+import type { RouteRecordName } from 'vue-router';
 
-let items = ref([
+const items = ref([
 	{
 		title: 'Accueil',
 		route: '/',
 		class: 'gg-home'
+	},
+	{
+		title: 'Cours',
+		route: '/lessons',
+		class: 'gg-briefcase'
 	},
 	{
 		title: 'Recherche',
@@ -26,11 +32,22 @@ let items = ref([
 	}
 ]);
 
+function isRequired(routeName: string|RouteRecordName|null|undefined): boolean {
+	if(typeof routeName !== 'string') {
+		return false;
+	}
+	let menus = ['lessons', 'edit', 'viewer'];
+	return menus.includes(routeName);
+}
 </script>
 
 <template>
-  <RouterView id="router" />
-  <Menu id="menu" :menu-items="items"></Menu>
+	<div id="content">
+		<Topbar id="topbar" v-if="isRequired($route.name)" class="no-print" />
+		<RouterView id="router" />
+	</div>
+	<Menu class="no-print" id="menu" :menu-items="items"></Menu>
+	
 </template>
 
 <style>
@@ -39,33 +56,33 @@ let items = ref([
 
 #app {
   	display: flex;
-	flex-direction: row-reverse
+	flex-direction: row-reverse;
+	width:100vw;
+	height:100vh;
 }
 
-#router {
+#rooter{
+	overflow:auto;
+}
+
+#content {
   	flex: auto;
-  	height: 100vh;
+	padding:20px;
 }
 
 #menu {
-  	width: 250px;
-  	height: 100vh;
+  	min-width: 200px;
 	float:left;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1200px) {
 	#app {
-  		display: block;
-	}
-
-  	#router {
-    	width: 100vw;
-    	height: calc(100vh - 70px);
+		flex-direction: column;
 	}
 
   	#menu {
-    	width: 100vw;
-		height: 70px;
+		width:unset;
+		height: 80px;
   	}
 }
 
