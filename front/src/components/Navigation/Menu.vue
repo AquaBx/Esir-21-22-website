@@ -11,19 +11,19 @@ defineProps<{
 </script>
 
 <template>
-	<container>
+	<nav class="menu-container">
 	<template v-for="item of menuItems">
-		<a @click="$router.push(item.route)">
-			<div><i :class="item.class"></i></div>
-			<p>{{ item.title }}</p>
+		<a @click="$router.push(item.route)" class="menu-item">
+			<div class="icon-container"><i :class="item.class"></i></div>
+			<p class="item-title">{{ item.title }}</p>
 		</a>
 	</template>
-	</container>
+	</nav>
 </template>
 
 <style scoped>
 
-container{
+.menu-container {
 	color : var(--text);
 
 	display: grid;
@@ -32,34 +32,34 @@ container{
 	background-color: var(--compl);
 }
 
-container > a {
+.menu-container > .menu-item {
 	display: flex;
 	align-items: center;
 }
 
-container > a > div {
+.menu-container > .menu-item > .icon-container {
 	flex:20px;
 	display: grid;
 	place-items: center;
 }
 
-container > a > p {
+.menu-container > .menu-item > .item-title {
 	flex:auto;
 }
 
-container > a:hover *{
-	border-color:var(--accent);
-	color:var(--accent);
-	fill: var(--accent);
+.menu-container > .menu-item:hover *{
+	border-color:var(--red);
+	color:var(--red);
+	fill: var(--red);
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1200px) {
 
-	container {
+	.menu-container {
 		grid-auto-flow: column;
 	}
 
-	container > a > p {
+	.menu-container > .menu-item > .item-title {
 		display: none;
 	}
 

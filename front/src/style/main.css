@@ -2,12 +2,18 @@
 
 @import url('https://css.gg/all.css');
 
+:root {
+	--blue:#5A8DEE;
+	--green:#39DA8A;
+	--red:#F26061;	
+}
+
 @media (prefers-color-scheme: light){
 	:root	{
 		--background:rgb(255, 255, 255);
         --compl:rgb(245,245,255);
 		--text:#000000;
-		--accent:#f9b219;
+		--text-reverse:#ffffff;
 		--shadow:rgba(0, 0, 0, 0.1);
 	}
 }
@@ -17,7 +23,7 @@
         --background:rgb(25, 25, 35);
         --compl:rgb(20, 20, 30);
 		--text:#ffffff;
-		--accent:#f9b219;
+		--text-reverse:#000000;
 		--shadow:rgba(0, 0, 0, 0.3);
 	}
 }

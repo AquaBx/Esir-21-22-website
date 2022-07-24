@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, getCurrentInstance } from 'vue';
 import { Tree } from '@/types/Tree';
-import TreeNode from '@/components/Navigation/TreeNode.vue';
+import TreeNode from '@/components/Main/TreeNode.vue';
 
 const props = defineProps<{
     root: Tree.TreeNode,
@@ -32,23 +32,27 @@ function popChild(): void {
     globals.currentPath.pop();
     currentNode.value = Tree.getNodeFromPath(props.root, globals.currentPath);
 }
+
+function getIcon(kind: Tree.NodeKind): string {
+    return (kind === Tree.NodeKind.Folder) ? 'gg-folder' : 'gg-file';
+}
 </script>
 
 <template>
-    <nav>
+    <main>
         <template v-if="currentNode.data.name != 'root'">
             <div @click="popChild()">Retour</div>
         </template>
         <template v-for="child in currentNode.children">
             <div @click="pushChild(child)">
-                <TreeNode :data="child.data" :kind="child.kind" :path="getChildPath(props.path, child.data.name)" :children="child.children" />
+                <TreeNode :icon="getIcon(child.kind)" :data="child.data" :kind="child.kind" :path="getChildPath(props.path, child.data.name)" :children="child.children" />
             </div>
         </template>
-    </nav>
+    </main>
 </template>
 
 <style scoped>
-nav {
+main {
     display: block;
     width: 100%;
     height: 100%;
@@ -56,7 +60,7 @@ nav {
     flex:300px;
 }
 
-nav > div {
+main > div {
     display: block;
     border: 1px solid black;
     cursor: pointer;
